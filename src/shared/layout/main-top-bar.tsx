@@ -23,14 +23,12 @@ const MainTopBar = () => {
   }, [theme]);
 
   return (
-    <header className='sticky top-0 w-full flex justify-between'>
-      <div className='px-4 py-2'>
-        <div className='flex items-center gap-1'>
-          <Jera id='main-logo' className='w-8 h-8' />
-          <h1 className='font-bold text-xl'>Jera</h1>
-        </div>
+    <header className='sticky top-0 w-full flex justify-between py-3'>
+      <div className='flex items-center gap-1 px-4'>
+        <Jera id='main-logo' className='w-7 h-7' />
+        <h1 className='font-bold text-l'>Jera</h1>
       </div>
-      <div className='px-4 py-2'>
+      <div className='px-4'>
         <ToggleButton theme={theme} toggleTheme={toggleTheme} />
       </div>
     </header>
