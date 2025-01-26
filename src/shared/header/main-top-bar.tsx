@@ -1,8 +1,9 @@
 'use client';
 
 import Jera from '../icon/jera.svg';
-import ToggleButton from '@/shared/layout/components/toogle-button';
+import ToggleButton from '@/shared/header/components/toogle-button';
 import { useEffect, useState } from 'react';
+import SearchButton from '@/shared/header/components/search-button';
 
 export type Theme = 'dark' | 'light';
 
@@ -28,7 +29,8 @@ const MainTopBar = () => {
         <Jera id='main-logo' className='w-7 h-7' />
         <h1 className='font-bold text-l'>Jera</h1>
       </div>
-      <div className='px-4'>
+      <div className='px-4 flex items-center gap-3'>
+        <SearchButton />
         <ToggleButton theme={theme} toggleTheme={toggleTheme} />
       </div>
     </header>

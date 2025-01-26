@@ -2,7 +2,7 @@
 
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Theme } from '@/shared/layout/main-top-bar';
+import { Theme } from '@/shared/header/main-top-bar';
 
 type ToggleButtonProps = {
   theme: Theme;

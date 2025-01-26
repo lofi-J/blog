@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import MainTopBar from '@/shared/layout/main-top-bar';
+import MainTopBar from '@/shared/header/main-top-bar';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
