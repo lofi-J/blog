@@ -87,11 +87,6 @@
     @apply bg-background text-foreground;
   }
 }
-@layer components {
-  .modal-container {
-    @apply bg-red-600;
-  }
-}
 
 html, body {
   overscroll-behavior: none;
