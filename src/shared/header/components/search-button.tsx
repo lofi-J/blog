@@ -2,15 +2,16 @@
 
 import { Button } from '@/components/ui/button';
 import { useModal } from '@/shared/modal/context/modal-context';
+import useKeyboardBinding from '@/shared/hook/useKeyboardBinding';
 
 const SearchButton = () => {
   const { open, close, modals } = useModal();
-
   const openSearchModal = () => {
-    console.log('modals', modals);
-
+    console.log('action called');
     open('test');
   };
+
+  useKeyboardBinding('Meta', 'k', openSearchModal);
 
   return (
     <Button variant='outline' className='text-s text-gray-500 hover:var(--foreground)' onClick={openSearchModal}>
