@@ -3,13 +3,11 @@
 import { Button } from '@/components/ui/button';
 import { useModal } from '@/shared/modal/context/modal-context';
 import useKeyboardBinding from '@/shared/hook/useKeyboardBinding';
+import SearchModal from '@/components/modal/search-modal';
 
 const SearchButton = () => {
-  const { open, close, modals } = useModal();
-  const openSearchModal = () => {
-    console.log('action called');
-    open('test');
-  };
+  const { open } = useModal();
+  const openSearchModal = () => open(<SearchModal />);
 
   useKeyboardBinding('Meta', 'k', openSearchModal);
 

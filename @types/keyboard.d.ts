@@ -1,4 +1,4 @@
-export type ModifierKey = 'Control' | 'Shift' | 'Alt' | 'Meta';
+export type ModifierKey = 'Control' | 'Shift' | 'Alt' | 'Meta' | 'NULL';
 
 export type StandardKey =
   | 'a'

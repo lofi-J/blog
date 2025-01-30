@@ -8,14 +8,11 @@ const useKeyboardBinding = (modifierKey: ModifierKey, standardKey: StandardKey, 
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === modifierKey) {
-        console.log(1);
+      if (event.key === modifierKey || modifierKey === 'NULL') {
         isModifierPressedRef.current = true;
       }
-      console.log(isModifierPressedRef.current);
-      console.log(event.key);
+
       if (event.key === standardKey && isModifierPressedRef.current) {
-        console.log(2);
         event.preventDefault();
         action();
       }

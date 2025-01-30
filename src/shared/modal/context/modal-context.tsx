@@ -1,32 +1,30 @@
 'use client';
 
-import React, { createContext, PropsWithChildren, ReactNode, useContext, useState } from 'react';
+import React, { createContext, JSX, PropsWithChildren, useContext, useState } from 'react';
+import useKeyboardBinding from '@/shared/hook/useKeyboardBinding';
 
 type Context = {
-  modals: ReactNode[];
+  modals: JSX.Element[];
 
-  open: (modal: ReactNode) => void;
+  open: (modal: JSX.Element) => void;
 
   close: () => void;
 
   closeAll: () => void;
 };
 
-const ModalContext = createContext<Context>({
-  modals: [],
-  open: () => {},
-  close: () => {},
-  closeAll: () => {},
-});
+const ModalContext = createContext<Context | null>(null);
 
 const ModalProvider = ({ children }: PropsWithChildren) => {
-  const [modals, setModals] = useState<ReactNode[]>([]);
+  const [modals, setModals] = useState<JSX.Element[]>([]);
 
-  const open = (newModal: ReactNode) => setModals((prevModals) => [...prevModals, newModal]);
+  const open = (newModal: JSX.Element) => setModals((prevModals) => [...prevModals, newModal]);
 
   const close = () => setModals((prev) => prev.slice(0, prev.length - 1));
 
   const closeAll = () => setModals([]);
+
+  useKeyboardBinding('NULL', 'Escape', close);
 
   return <ModalContext.Provider value={{ modals, open, close, closeAll }}>{children}</ModalContext.Provider>;
 };
