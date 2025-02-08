@@ -13,10 +13,10 @@ const SearchButton = () => {
 
   return (
     <Button variant='outline' className='text-s bg-accent-gray py-1 h-8' onClick={openSearchModal}>
-      <span className='mr-3 tracking-wide'>Search by keyword...</span>
+      <span className='mr-1 sm:mr-1.5 tracking-wide font-small flex'>Search by keyword...</span>
       <span className='flex items-center gap-1'>
-        <kbd className='text-base'>⌘</kbd>
-        <kbd className='text-s'>K</kbd>
+        <kbd className='font-callout'>⌘</kbd>
+        <kbd className='font-small'>K</kbd>
       </span>
     </Button>
   );

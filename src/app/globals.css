@@ -94,6 +94,61 @@ html, body {
   overscroll-behavior: none;
   transition: color 0.5s linear;
 }
-body {
-  font-family: Arial, Helvetica, sans-serif;
+
+/* ======================================== */
+/*              Font Size 설정               */
+/* ======================================== */
+/*
+sm:  640px  → 작은 태블릿 및 작은 화면
+md:  768px  → 일반 태블릿 및 중간 화면
+lg: 1024px  → 노트북 및 큰 태블릿
+xl: 1280px  → 큰 노트북 및 데스크탑 모니터
+*/
+@layer components {
+  .font-large-title {
+    @apply text-[34px] sm:text-[36px] md:text-[38px] lg:text-[40px] xl:text-[42px] font-bold;
+  }
+
+  .font-title-1 {
+    @apply text-[28px] sm:text-[30px] md:text-[32px] lg:text-[34px] xl:text-[36px] font-bold;
+  }
+
+  .font-title-2 {
+    @apply text-[22px] sm:text-[24px] md:text-[26px] lg:text-[28px] xl:text-[30px] font-semibold;
+  }
+
+  .font-title-3 {
+    @apply text-[20px] sm:text-[21px] md:text-[22px] lg:text-[24px] xl:text-[26px] font-semibold;
+  }
+
+  .font-headline {
+    @apply text-[17px] sm:text-[18px] md:text-[19px] lg:text-[20px] xl:text-[22px] font-semibold;
+  }
+
+  .font-body {
+    @apply text-[16px] sm:text-[17px] md:text-[18px] lg:text-[19px] xl:text-[20px] font-normal;
+  }
+
+  .font-callout {
+    @apply text-[16px] sm:text-[16px] md:text-[17px] lg:text-[18px] xl:text-[19px] font-medium;
+  }
+
+  .font-subhead {
+    @apply text-[15px] sm:text-[16px] md:text-[16px] lg:text-[17px] xl:text-[18px] font-medium;
+  }
+
+  .font-footnote {
+    @apply text-[13px] sm:text-[14px] md:text-[14px] lg:text-[15px] xl:text-[16px] font-normal;
+  }
+
+  .font-caption-1 {
+    @apply text-[12px] sm:text-[12px] md:text-[13px] lg:text-[14px] xl:text-[15px] font-normal;
+  }
+
+  .font-caption-2 {
+    @apply text-[11px] sm:text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] font-normal;
+  }
+  .font-small {
+    @apply text-[11px] sm:text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] font-normal;
+  }
 }
