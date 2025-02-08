@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import React from 'react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import MainTopBar from '@/shared/header/main-top-bar';
 import ModalProvider from '@/shared/modal/context/modal-context';
 import RootModalRenderer from '@/shared/modal/component/RootModalRenderer';
 
@@ -30,7 +29,6 @@ export default function RootLayout({
     <html lang='en' className='dark'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ModalProvider>
-          <MainTopBar />
           {children}
           <RootModalRenderer />
         </ModalProvider>

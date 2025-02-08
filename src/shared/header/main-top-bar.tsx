@@ -28,7 +28,7 @@ const MainTopBar = () => {
 
   return (
     <header className='sticky top-0 w-full flex justify-between px-4 h-[56px]'>
-      <div className='flex items-center gap-1' onClick={() => router.push('/')}>
+      <div className='flex items-center gap-1 cursor-pointer' onClick={() => router.push('/')}>
         <Jera id='main-logo' className='w-7 md:w-8' />
         <h1 className='font-bold font-title3 hidden sm:block'>Jera</h1>
       </div>
