@@ -36,8 +36,6 @@ export default function LoginPage() {
     router.push('/admin');
   };
 
-  console.log(error);
-
   return (
     <div className='flex flex-col justify-center w-[100vw] h-[100vh] px-4'>
       <div className='w-full max-w-[260px] sm:max-w-[400px] mx-auto'>
