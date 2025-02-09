@@ -93,6 +93,11 @@
 html, body {
   overscroll-behavior: none;
   transition: color 0.5s linear;
+
+  /* MarkDown Editor Style Override */
+  .cm-editor {
+    outline: none !important;
+  }
 }
 
 /* ======================================== */
