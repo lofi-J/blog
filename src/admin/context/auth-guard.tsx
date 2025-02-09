@@ -45,6 +45,12 @@ export default function AuthGuardProvider({ children }: PropsWithChildren) {
     return () => authListener.subscription.unsubscribe();
   }, []);
 
+  useEffect(() => {
+    if (!user) {
+      router.push('/admin/login');
+    }
+  }, [user]);
+
   return <AuthGuardContext.Provider value={{ user, logout }}>{children}</AuthGuardContext.Provider>;
 }
 
