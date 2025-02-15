@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@types/*": ["./@types/*"]
+      "@types/*": ["./@types/*"],
+      "@graphql/*": ["graphql/*"]
     },
     "typeRoots": ["./@types", "./node_modules/@types"]
   },

@@ -1,0 +1,12 @@
+query GetPosts {
+  postsCollection {
+    edges {
+      node {
+        id
+        title
+        content
+        created_at
+      }
+    }
+  }
+}
