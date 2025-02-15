@@ -3,8 +3,8 @@
 import { useGetPostsQuery } from '@graphql/generated';
 
 export default function AdminPage() {
-  // const { data } = useGetPostsQuery();
+  const { data } = useGetPostsQuery();
 
-  // console.log(JSON.stringify(data, null, 2));
+  console.log(JSON.stringify(data, null, 2));
   return <div>d</div>;
 }
