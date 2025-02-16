@@ -4,6 +4,9 @@ import PostPreview from '@/admin/component/post/post-preview';
 import { useRef, useState } from 'react';
 import CodeMirror, { oneDark, ReactCodeMirrorRef, ViewUpdate } from '@uiw/react-codemirror';
 import { markdown } from '@codemirror/lang-markdown';
+import { Button } from '@/components/ui/button';
+import { useCreatePostMutation } from '@graphql/generated';
+import { toast } from 'react-toastify';
 
 export default function PostPage() {
   const [title, setTitle] = useState('');
@@ -12,6 +15,22 @@ export default function PostPage() {
 
   const onChangeContent = (value: string, viewUpdate: ViewUpdate) => {
     setContent(value);
+  };
+
+  const [createPost, { data, loading, error }] = useCreatePostMutation();
+
+  const handleSubmit = async () => {
+    try {
+      await createPost({
+        variables: {
+          title,
+          content,
+        },
+      });
+      toast(`게시글 생성에 성공했습니다. [${data?.insertIntopostsCollection?.records[0].title}]`);
+    } catch {
+      toast.error(`게시글 생성 실패: ${error}`);
+    }
   };
 
   return (
@@ -32,6 +51,11 @@ export default function PostPage() {
           theme={oneDark}
           ref={editorRef}
         />
+        <div className='fixed bottom-0 right-0 p-10'>
+          <Button variant={'secondary'} className='bg-green-600' onClick={handleSubmit} disabled={loading}>
+            기고하기
+          </Button>
+        </div>
       </div>
       <PostPreview title={title} content={content} />
     </div>
