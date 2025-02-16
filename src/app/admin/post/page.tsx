@@ -1,13 +1,18 @@
 'use client';
 
-import PostEditor from '@/admin/component/post/post-editor';
 import PostPreview from '@/admin/component/post/post-preview';
 import { useRef, useState } from 'react';
+import CodeMirror, { oneDark, ReactCodeMirrorRef, ViewUpdate } from '@uiw/react-codemirror';
+import { markdown } from '@codemirror/lang-markdown';
 
 export default function PostPage() {
-  /* Editor State */
   const [title, setTitle] = useState('');
-  const contentRef = useRef<string>('');
+  const [content, setContent] = useState('');
+  const editorRef = useRef<ReactCodeMirrorRef | null>(null);
+
+  const onChangeContent = (value: string, viewUpdate: ViewUpdate) => {
+    setContent(value);
+  };
 
   return (
     <div className='flex flex-1'>
@@ -20,9 +25,15 @@ export default function PostPage() {
           placeholder='TITLE'
         />
         <div className='w-10 h-1 bg-white' />
-        <PostEditor content={contentRef.current} />
+        <CodeMirror
+          value={content}
+          onChange={onChangeContent}
+          extensions={[markdown(), oneDark]}
+          theme={oneDark}
+          ref={editorRef}
+        />
       </div>
-      <PostPreview />
+      <PostPreview title={title} content={content} />
     </div>
   );
 }

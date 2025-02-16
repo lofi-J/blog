@@ -1,0 +1,10 @@
+mutation CreatePost($title: String!, $content: String!) {
+  insertIntopostsCollection(objects: {title: $title, content: $content}) {
+    records {
+      id
+      title
+      content
+      created_at
+    }
+  }
+}
