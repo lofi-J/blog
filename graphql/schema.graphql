@@ -201,6 +201,28 @@ scalar JSON
 
 """The root type for creating and mutating data"""
 type Mutation {
+  """Deletes zero or more records from the `categories` collection"""
+  deleteFromcategoriesCollection(
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+
+    """Restricts the mutation's impact to records matching the criteria"""
+    filter: categoriesFilter
+  ): categoriesDeleteResponse!
+
+  """Deletes zero or more records from the `post_categories` collection"""
+  deleteFrompost_categoriesCollection(
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+
+    """Restricts the mutation's impact to records matching the criteria"""
+    filter: post_categoriesFilter
+  ): post_categoriesDeleteResponse!
+
   """Deletes zero or more records from the `posts` collection"""
   deleteFrompostsCollection(
     """
@@ -212,8 +234,46 @@ type Mutation {
     filter: postsFilter
   ): postsDeleteResponse!
 
+  """Adds one or more `categories` records to the collection"""
+  insertIntocategoriesCollection(objects: [categoriesInsertInput!]!): categoriesInsertResponse
+
+  """Adds one or more `post_categories` records to the collection"""
+  insertIntopost_categoriesCollection(objects: [post_categoriesInsertInput!]!): post_categoriesInsertResponse
+
   """Adds one or more `posts` records to the collection"""
   insertIntopostsCollection(objects: [postsInsertInput!]!): postsInsertResponse
+
+  """Updates zero or more records in the `categories` collection"""
+  updatecategoriesCollection(
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+
+    """Restricts the mutation's impact to records matching the criteria"""
+    filter: categoriesFilter
+
+    """
+    Fields that are set will be updated for all records matching the `filter`
+    """
+    set: categoriesUpdateInput!
+  ): categoriesUpdateResponse!
+
+  """Updates zero or more records in the `post_categories` collection"""
+  updatepost_categoriesCollection(
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+
+    """Restricts the mutation's impact to records matching the criteria"""
+    filter: post_categoriesFilter
+
+    """
+    Fields that are set will be updated for all records matching the `filter`
+    """
+    set: post_categoriesUpdateInput!
+  ): post_categoriesUpdateResponse!
 
   """Updates zero or more records in the `posts` collection"""
   updatepostsCollection(
@@ -272,11 +332,63 @@ type PageInfo {
 
 """The root type for querying data"""
 type Query {
+  """A pagable collection of type `categories`"""
+  categoriesCollection(
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: categoriesFilter
+
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """
+    Skip n values from the after cursor. Alternative to cursor pagination. Backward pagination not supported.
+    """
+    offset: Int
+
+    """Sort order to apply to the collection"""
+    orderBy: [categoriesOrderBy!]
+  ): categoriesConnection
+
   """Retrieve a record by its `ID`"""
   node(
     """The record's `ID`"""
     nodeId: ID!
   ): Node
+
+  """A pagable collection of type `post_categories`"""
+  post_categoriesCollection(
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: post_categoriesFilter
+
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """
+    Skip n values from the after cursor. Alternative to cursor pagination. Backward pagination not supported.
+    """
+    offset: Int
+
+    """Sort order to apply to the collection"""
+    orderBy: [post_categoriesOrderBy!]
+  ): post_categoriesConnection
 
   """A pagable collection of type `posts`"""
   postsCollection(
@@ -387,6 +499,180 @@ input UUIDListFilter {
   overlaps: [UUID!]
 }
 
+type categories implements Node {
+  id: Int!
+  name: String
+
+  """Globally Unique Record Identifier"""
+  nodeId: ID!
+  post_categoriesCollection(
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: post_categoriesFilter
+
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """
+    Skip n values from the after cursor. Alternative to cursor pagination. Backward pagination not supported.
+    """
+    offset: Int
+
+    """Sort order to apply to the collection"""
+    orderBy: [post_categoriesOrderBy!]
+  ): post_categoriesConnection
+}
+
+type categoriesConnection {
+  edges: [categoriesEdge!]!
+  pageInfo: PageInfo!
+}
+
+type categoriesDeleteResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [categories!]!
+}
+
+type categoriesEdge {
+  cursor: String!
+  node: categories!
+}
+
+input categoriesFilter {
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [categoriesFilter!]
+  id: IntFilter
+  name: StringFilter
+  nodeId: IDFilter
+
+  """Negates a filter"""
+  not: categoriesFilter
+
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [categoriesFilter!]
+}
+
+input categoriesInsertInput {
+  name: String
+}
+
+type categoriesInsertResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [categories!]!
+}
+
+input categoriesOrderBy {
+  id: OrderByDirection
+  name: OrderByDirection
+}
+
+input categoriesUpdateInput {
+  name: String
+}
+
+type categoriesUpdateResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [categories!]!
+}
+
+type post_categories implements Node {
+  categories: categories
+  category_id: Int!
+
+  """Globally Unique Record Identifier"""
+  nodeId: ID!
+  post_id: Int!
+  posts: posts
+}
+
+type post_categoriesConnection {
+  edges: [post_categoriesEdge!]!
+  pageInfo: PageInfo!
+}
+
+type post_categoriesDeleteResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [post_categories!]!
+}
+
+type post_categoriesEdge {
+  cursor: String!
+  node: post_categories!
+}
+
+input post_categoriesFilter {
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [post_categoriesFilter!]
+  category_id: IntFilter
+  nodeId: IDFilter
+
+  """Negates a filter"""
+  not: post_categoriesFilter
+
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [post_categoriesFilter!]
+  post_id: IntFilter
+}
+
+input post_categoriesInsertInput {
+  category_id: Int
+  post_id: Int
+}
+
+type post_categoriesInsertResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [post_categories!]!
+}
+
+input post_categoriesOrderBy {
+  category_id: OrderByDirection
+  post_id: OrderByDirection
+}
+
+input post_categoriesUpdateInput {
+  category_id: Int
+  post_id: Int
+}
+
+type post_categoriesUpdateResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [post_categories!]!
+}
+
 type posts implements Node {
   content: String!
   created_at: Datetime
@@ -394,6 +680,30 @@ type posts implements Node {
 
   """Globally Unique Record Identifier"""
   nodeId: ID!
+  post_categoriesCollection(
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: post_categoriesFilter
+
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """
+    Skip n values from the after cursor. Alternative to cursor pagination. Backward pagination not supported.
+    """
+    offset: Int
+
+    """Sort order to apply to the collection"""
+    orderBy: [post_categoriesOrderBy!]
+  ): post_categoriesConnection
   title: String!
 }
 

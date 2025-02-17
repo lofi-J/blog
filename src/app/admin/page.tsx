@@ -1,9 +1,9 @@
 'use client';
 
-import { useGetPostsQuery } from '@graphql/generated';
+// import { useGetPostsQuery } from '@graphql/generated';
 
 export default function AdminPage() {
-  const { data } = useGetPostsQuery();
+  // const { data } = useGetPostsQuery();
 
-  return <div>{JSON.stringify(data, null, 2)}</div>;
+  return <div></div>;
 }

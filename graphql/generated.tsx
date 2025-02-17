@@ -180,12 +180,38 @@ export type IntListFilter = {
 /** The root type for creating and mutating data */
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Deletes zero or more records from the `categories` collection */
+  deleteFromcategoriesCollection: CategoriesDeleteResponse;
+  /** Deletes zero or more records from the `post_categories` collection */
+  deleteFrompost_categoriesCollection: Post_CategoriesDeleteResponse;
   /** Deletes zero or more records from the `posts` collection */
   deleteFrompostsCollection: PostsDeleteResponse;
+  /** Adds one or more `categories` records to the collection */
+  insertIntocategoriesCollection?: Maybe<CategoriesInsertResponse>;
+  /** Adds one or more `post_categories` records to the collection */
+  insertIntopost_categoriesCollection?: Maybe<Post_CategoriesInsertResponse>;
   /** Adds one or more `posts` records to the collection */
   insertIntopostsCollection?: Maybe<PostsInsertResponse>;
+  /** Updates zero or more records in the `categories` collection */
+  updatecategoriesCollection: CategoriesUpdateResponse;
+  /** Updates zero or more records in the `post_categories` collection */
+  updatepost_categoriesCollection: Post_CategoriesUpdateResponse;
   /** Updates zero or more records in the `posts` collection */
   updatepostsCollection: PostsUpdateResponse;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromcategoriesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<CategoriesFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFrompost_CategoriesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Post_CategoriesFilter>;
 };
 
 
@@ -197,8 +223,36 @@ export type MutationDeleteFrompostsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationInsertIntocategoriesCollectionArgs = {
+  objects: Array<CategoriesInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntopost_CategoriesCollectionArgs = {
+  objects: Array<Post_CategoriesInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationInsertIntopostsCollectionArgs = {
   objects: Array<PostsInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatecategoriesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<CategoriesFilter>;
+  set: CategoriesUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatepost_CategoriesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Post_CategoriesFilter>;
+  set: Post_CategoriesUpdateInput;
 };
 
 
@@ -243,16 +297,44 @@ export type PageInfo = {
 /** The root type for querying data */
 export type Query = {
   __typename?: 'Query';
+  /** A pagable collection of type `categories` */
+  categoriesCollection?: Maybe<CategoriesConnection>;
   /** Retrieve a record by its `ID` */
   node?: Maybe<Node>;
+  /** A pagable collection of type `post_categories` */
+  post_categoriesCollection?: Maybe<Post_CategoriesConnection>;
   /** A pagable collection of type `posts` */
   postsCollection?: Maybe<PostsConnection>;
 };
 
 
 /** The root type for querying data */
+export type QueryCategoriesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<CategoriesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<CategoriesOrderBy>>;
+};
+
+
+/** The root type for querying data */
 export type QueryNodeArgs = {
   nodeId: Scalars['ID']['input'];
+};
+
+
+/** The root type for querying data */
+export type QueryPost_CategoriesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Post_CategoriesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Post_CategoriesOrderBy>>;
 };
 
 
@@ -331,6 +413,160 @@ export type UuidListFilter = {
   overlaps?: InputMaybe<Array<Scalars['UUID']['input']>>;
 };
 
+export type Categories = Node & {
+  __typename?: 'categories';
+  id: Scalars['Int']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  post_categoriesCollection?: Maybe<Post_CategoriesConnection>;
+};
+
+
+export type CategoriesPost_CategoriesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Post_CategoriesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Post_CategoriesOrderBy>>;
+};
+
+export type CategoriesConnection = {
+  __typename?: 'categoriesConnection';
+  edges: Array<CategoriesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type CategoriesDeleteResponse = {
+  __typename?: 'categoriesDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Categories>;
+};
+
+export type CategoriesEdge = {
+  __typename?: 'categoriesEdge';
+  cursor: Scalars['String']['output'];
+  node: Categories;
+};
+
+export type CategoriesFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<CategoriesFilter>>;
+  id?: InputMaybe<IntFilter>;
+  name?: InputMaybe<StringFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<CategoriesFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<CategoriesFilter>>;
+};
+
+export type CategoriesInsertInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CategoriesInsertResponse = {
+  __typename?: 'categoriesInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Categories>;
+};
+
+export type CategoriesOrderBy = {
+  id?: InputMaybe<OrderByDirection>;
+  name?: InputMaybe<OrderByDirection>;
+};
+
+export type CategoriesUpdateInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CategoriesUpdateResponse = {
+  __typename?: 'categoriesUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Categories>;
+};
+
+export type Post_Categories = Node & {
+  __typename?: 'post_categories';
+  categories?: Maybe<Categories>;
+  category_id: Scalars['Int']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  post_id: Scalars['Int']['output'];
+  posts?: Maybe<Posts>;
+};
+
+export type Post_CategoriesConnection = {
+  __typename?: 'post_categoriesConnection';
+  edges: Array<Post_CategoriesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Post_CategoriesDeleteResponse = {
+  __typename?: 'post_categoriesDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Post_Categories>;
+};
+
+export type Post_CategoriesEdge = {
+  __typename?: 'post_categoriesEdge';
+  cursor: Scalars['String']['output'];
+  node: Post_Categories;
+};
+
+export type Post_CategoriesFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<Post_CategoriesFilter>>;
+  category_id?: InputMaybe<IntFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<Post_CategoriesFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<Post_CategoriesFilter>>;
+  post_id?: InputMaybe<IntFilter>;
+};
+
+export type Post_CategoriesInsertInput = {
+  category_id?: InputMaybe<Scalars['Int']['input']>;
+  post_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type Post_CategoriesInsertResponse = {
+  __typename?: 'post_categoriesInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Post_Categories>;
+};
+
+export type Post_CategoriesOrderBy = {
+  category_id?: InputMaybe<OrderByDirection>;
+  post_id?: InputMaybe<OrderByDirection>;
+};
+
+export type Post_CategoriesUpdateInput = {
+  category_id?: InputMaybe<Scalars['Int']['input']>;
+  post_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type Post_CategoriesUpdateResponse = {
+  __typename?: 'post_categoriesUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Post_Categories>;
+};
+
 export type Posts = Node & {
   __typename?: 'posts';
   content: Scalars['String']['output'];
@@ -338,7 +574,19 @@ export type Posts = Node & {
   id: Scalars['Int']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
+  post_categoriesCollection?: Maybe<Post_CategoriesConnection>;
   title: Scalars['String']['output'];
+};
+
+
+export type PostsPost_CategoriesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Post_CategoriesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Post_CategoriesOrderBy>>;
 };
 
 export type PostsConnection = {
@@ -410,6 +658,20 @@ export type PostsUpdateResponse = {
   records: Array<Posts>;
 };
 
+export type AddCategoryMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+}>;
+
+
+export type AddCategoryMutation = { __typename?: 'Mutation', insertIntocategoriesCollection?: { __typename?: 'categoriesInsertResponse', affectedCount: number, records: Array<{ __typename?: 'categories', id: number, name?: string | undefined }> } | undefined };
+
+export type DeleteCategoryMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteCategoryMutation = { __typename?: 'Mutation', deleteFromcategoriesCollection: { __typename?: 'categoriesDeleteResponse', affectedCount: number } };
+
 export type CreatePostMutationVariables = Exact<{
   title: Scalars['String']['input'];
   content: Scalars['String']['input'];
@@ -418,12 +680,87 @@ export type CreatePostMutationVariables = Exact<{
 
 export type CreatePostMutation = { __typename?: 'Mutation', insertIntopostsCollection?: { __typename?: 'postsInsertResponse', records: Array<{ __typename?: 'posts', id: number, title: string, content: string, created_at?: unknown | undefined }> } | undefined };
 
+export type GetAllCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllCategoriesQuery = { __typename?: 'Query', categoriesCollection?: { __typename?: 'categoriesConnection', edges: Array<{ __typename?: 'categoriesEdge', node: { __typename?: 'categories', id: number, name?: string | undefined } }> } | undefined };
+
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetPostsQuery = { __typename?: 'Query', postsCollection?: { __typename?: 'postsConnection', edges: Array<{ __typename?: 'postsEdge', node: { __typename?: 'posts', id: number, title: string, content: string, created_at?: unknown | undefined } }> } | undefined };
 
 
+export const AddCategoryDocument = gql`
+    mutation AddCategory($name: String!) {
+  insertIntocategoriesCollection(objects: {name: $name}) {
+    affectedCount
+    records {
+      id
+      name
+    }
+  }
+}
+    `;
+export type AddCategoryMutationFn = Apollo.MutationFunction<AddCategoryMutation, AddCategoryMutationVariables>;
+
+/**
+ * __useAddCategoryMutation__
+ *
+ * To run a mutation, you first call `useAddCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addCategoryMutation, { data, loading, error }] = useAddCategoryMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useAddCategoryMutation(baseOptions?: Apollo.MutationHookOptions<AddCategoryMutation, AddCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddCategoryMutation, AddCategoryMutationVariables>(AddCategoryDocument, options);
+      }
+export type AddCategoryMutationHookResult = ReturnType<typeof useAddCategoryMutation>;
+export type AddCategoryMutationResult = Apollo.MutationResult<AddCategoryMutation>;
+export type AddCategoryMutationOptions = Apollo.BaseMutationOptions<AddCategoryMutation, AddCategoryMutationVariables>;
+export const DeleteCategoryDocument = gql`
+    mutation DeleteCategory($id: Int!) {
+  deleteFromcategoriesCollection(filter: {id: {eq: $id}}) {
+    affectedCount
+  }
+}
+    `;
+export type DeleteCategoryMutationFn = Apollo.MutationFunction<DeleteCategoryMutation, DeleteCategoryMutationVariables>;
+
+/**
+ * __useDeleteCategoryMutation__
+ *
+ * To run a mutation, you first call `useDeleteCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteCategoryMutation, { data, loading, error }] = useDeleteCategoryMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteCategoryMutation, DeleteCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteCategoryMutation, DeleteCategoryMutationVariables>(DeleteCategoryDocument, options);
+      }
+export type DeleteCategoryMutationHookResult = ReturnType<typeof useDeleteCategoryMutation>;
+export type DeleteCategoryMutationResult = Apollo.MutationResult<DeleteCategoryMutation>;
+export type DeleteCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteCategoryMutation, DeleteCategoryMutationVariables>;
 export const CreatePostDocument = gql`
     mutation CreatePost($title: String!, $content: String!) {
   insertIntopostsCollection(objects: {title: $title, content: $content}) {
@@ -463,6 +800,50 @@ export function useCreatePostMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreatePostMutationHookResult = ReturnType<typeof useCreatePostMutation>;
 export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>;
 export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMutation, CreatePostMutationVariables>;
+export const GetAllCategoriesDocument = gql`
+    query GetAllCategories {
+  categoriesCollection {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllCategoriesQuery__
+ *
+ * To run a query within a React component, call `useGetAllCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllCategoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, options);
+      }
+export function useGetAllCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, options);
+        }
+export function useGetAllCategoriesSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, options);
+        }
+export type GetAllCategoriesQueryHookResult = ReturnType<typeof useGetAllCategoriesQuery>;
+export type GetAllCategoriesLazyQueryHookResult = ReturnType<typeof useGetAllCategoriesLazyQuery>;
+export type GetAllCategoriesSuspenseQueryHookResult = ReturnType<typeof useGetAllCategoriesSuspenseQuery>;
+export type GetAllCategoriesQueryResult = Apollo.QueryResult<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>;
 export const GetPostsDocument = gql`
     query GetPosts {
   postsCollection {

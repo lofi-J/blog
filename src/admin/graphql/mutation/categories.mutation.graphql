@@ -1,0 +1,16 @@
+# 카테고리 생성
+mutation AddCategory($name: String!) {
+  insertIntocategoriesCollection(objects: {name: $name}) {
+    affectedCount
+    records {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteCategory($id: Int!) {
+  deleteFromcategoriesCollection(filter: {id: {eq: $id}}) {
+    affectedCount
+  }
+}

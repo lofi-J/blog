@@ -1,4 +1,4 @@
-import { Home, StickyNote, FileSearch } from 'lucide-react';
+import { Home, StickyNote, FileSearch, Tags } from 'lucide-react';
 
 const BASE_PATH = '/admin';
 export const items = [
@@ -8,9 +8,14 @@ export const items = [
     icon: Home,
   },
   {
-    title: 'post',
+    title: 'Posts',
     url: `${BASE_PATH}/post`,
     icon: StickyNote,
+  },
+  {
+    title: 'Categories',
+    url: `${BASE_PATH}/categories`,
+    icon: Tags,
   },
   {
     title: 'search',
